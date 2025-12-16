@@ -31,8 +31,8 @@ services:
       - audio:/audio
     restart: always
 
-  py-audio-server:
-    image: python:3.11-alpine
+  segment-preview:
+    image: python:3.13-slim
     working_dir: /audio
     volumes:
       - audio:/audio:ro
