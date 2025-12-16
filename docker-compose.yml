@@ -1,0 +1,46 @@
+services:
+  icecast:
+    image: deepcomp/icecast2
+    ports:
+      - "8000:8000"
+    environment:
+      ICECAST_SOURCE_PASSWORD: hackme
+      ICECAST_ADMIN_PASSWORD: admin
+      ICECAST_PASSWORD: hackme
+
+  segmenter:
+    build: ./segmenter
+    depends_on:
+      - icecast
+    volumes:
+      - audio:/audio
+    restart: always
+
+  stream:
+    build: ./stream
+    depends_on:
+      - icecast
+    devices:
+      - /dev/snd:/dev/snd
+
+  recogniser:
+    build: ./recogniser
+    depends_on:
+      - segmenter
+    volumes:
+      - audio:/audio
+    restart: always
+
+  py-audio-server:
+    image: python:3.11-alpine
+    working_dir: /audio
+    volumes:
+      - audio:/audio:ro
+    command: >
+      sh -c "python -m http.server 8080 --bind 0.0.0.0"
+    ports:
+      - "8080:8080"
+    restart: always
+
+volumes:
+  audio:

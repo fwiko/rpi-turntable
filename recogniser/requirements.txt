@@ -1,0 +1,3 @@
+shazamio
+audioop-lts
+requests
