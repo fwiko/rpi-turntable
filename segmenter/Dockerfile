@@ -8,4 +8,4 @@ VOLUME /audio
 CMD ffmpeg -i http://icecast:8000/live.mp3 \
   -ac 1 -ar 44100 \
   -f segment -segment_time 12 -reset_timestamps 1 \
-  snippet_%03d.wav
+  snippet_%09d.wav
