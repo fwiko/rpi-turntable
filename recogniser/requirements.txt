@@ -1,3 +1,4 @@
 shazamio
 audioop-lts
 requests
+pylast
