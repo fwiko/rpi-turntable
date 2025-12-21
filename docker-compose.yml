@@ -11,7 +11,7 @@ services:
   audio-segmenter:
     build: ./segmenter
     depends_on:
-      - icecast
+      - icecast-stream
     volumes:
       - audio:/audio
     restart: always
@@ -19,20 +19,20 @@ services:
   source-stream:
     build: ./stream
     depends_on:
-      - icecast
+      - icecast-stream
     devices:
       - /dev/snd:/dev/snd
 
   music-recogniser:
     build: ./recogniser
     depends_on:
-      - segmenter
+      - audio-segmenter
     volumes:
       - audio:/audio
     environment:
-      LASTFM_API_KEY: LASTFM_API_KEY
-      LASTFM_API_SECRET: LASTFM_API_SECRET
-      LASTFM_SESSION_KEY: LASTFM_SESSION_KEY
+      LASTFM_API_KEY: ${LASTFM_API_KEY}
+      LASTFM_API_SECRET: ${LASTFM_API_SECRET}
+      LASTFM_SESSION_KEY: ${LASTFM_SESSION_KEY}
     restart: always
 
   audio-segment-preview:

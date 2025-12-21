@@ -12,7 +12,7 @@ stream = mksafe(stream)
 
 output.icecast(
   %mp3(bitrate=128, samplerate=44100, stereo=true),
-  host="icecast",
+  host="icecast-stream",
   port=8000,
   password="hackme",
   mount="live.mp3",

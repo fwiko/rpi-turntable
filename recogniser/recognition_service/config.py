@@ -6,7 +6,7 @@ from typing import Tuple
 @dataclass
 class Config:
     icecast_admin_url: str = (
-        "http://icecast:8000/admin/metadata?mount=/live.mp3&mode=updinfo&song="
+        "http://icecast-stream:8000/admin/metadata?mount=/live.mp3&mode=updinfo&song="
     )
     icecast_auth: Tuple[str, str] = ("admin", "admin")
     audio_dir: str = "/audio"
