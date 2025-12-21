@@ -1,5 +1,5 @@
 services:
-  icecast:
+  icecast-stream:
     image: deepcomp/icecast2
     ports:
       - "8000:8000"
@@ -8,7 +8,7 @@ services:
       ICECAST_ADMIN_PASSWORD: admin
       ICECAST_PASSWORD: hackme
 
-  segmenter:
+  audio-segmenter:
     build: ./segmenter
     depends_on:
       - icecast
@@ -16,22 +16,26 @@ services:
       - audio:/audio
     restart: always
 
-  stream:
+  source-stream:
     build: ./stream
     depends_on:
       - icecast
     devices:
       - /dev/snd:/dev/snd
 
-  recogniser:
+  music-recogniser:
     build: ./recogniser
     depends_on:
       - segmenter
     volumes:
       - audio:/audio
+    environment:
+      LASTFM_API_KEY: LASTFM_API_KEY
+      LASTFM_API_SECRET: LASTFM_API_SECRET
+      LASTFM_SESSION_KEY: LASTFM_SESSION_KEY
     restart: always
 
-  segment-preview:
+  audio-segment-preview:
     image: python:3.13-slim
     working_dir: /audio
     volumes:
