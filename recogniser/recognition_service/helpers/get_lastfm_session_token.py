@@ -10,7 +10,7 @@ skg = pylast.SessionKeyGenerator(network)
 url = skg.get_web_auth_url()
 session_key = ""
 
-print(f"Please authorize this script to access your account: {url}\n")
+print(f"Authorise this script to access your account here: {url}\n")
 
 webbrowser.open(url)
 
