@@ -1,6 +1,6 @@
 # Turntable Track Recognition — README
 
-A system that streams audio from a turntable into an Icecast server, segments the stream into short snippets, recognises music from those snippets, updates Icecast metadata, and optionally scrobbles tracks to Last.fm.
+A system that streams audio from a turntable to an Icecast server, segments the stream into short snippets, recognises music from those snippets, updates Icecast metadata with the current track, and optionally scrobbles tracks to Last.fm.
 
 This repository contains the following:
 - Stream input: [stream/stream.liq](stream/stream.liq) used by the Liquidsoap container.
